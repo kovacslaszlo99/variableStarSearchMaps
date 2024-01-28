@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='css/bootstrap.min.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='css/style.css')}}"
+    />
+    <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+    <title>Változó Csillag Kereső Térképek</title>
+    <script src="{{url_for('static', filename='js/jquery-3.6.1.min.js')}}"></script>
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
+  </head>
+
+  <body>
+    <ul>
+      {% for item in stars %}
+      <a href="/star?name={{ item }}"><li>{{ item }}</li></a>
+      {% endfor %}
+    </ul>
+    <hr />
+    <table border="0" style="width: 100%">
+      <tr>
+        <td>
+          <table border="0">
+            <tr>
+              <td><label for="starname">Változó csillag neve:</label></td>
+              <td>
+                <input type="text" id="starname" name="starname" value="" />
+              </td>
+            </tr>
+            <tr>
+              <td>Képfelontás(DPI):</td>
+              <td>
+                <input
+                  type="number"
+                  value="300"
+                  min="150"
+                  step="1"
+                  id="resolution"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">Térkép(ek) tájolása:</td>
+            </tr>
+            <tr>
+              <td>Normál:</td>
+              <td><input type="checkbox" id="normal" checked /></td>
+            </tr>
+            <tr>
+              <td>Zenit pizmás:</td>
+              <td><input type="checkbox" id="zenit" checked /></td>
+            </tr>
+            <tr>
+              <td>Newton távcső:</td>
+              <td><input type="checkbox" id="newton" checked /></td>
+            </tr>
+            <tr class="latomezo" data-lato="1" data-type="line">
+              <td colspan="2"><hr /></td>
+            </tr>
+            <tr class="latomezo" data-lato="1" data-type="label">
+              <td colspan="2">
+                <table style="width: 100%">
+                  <tr>
+                    <td style="width: 93%" align="center">
+                      <p class="latomezo" data-lato="1" data-type="text">
+                        Látómező 1.
+                      </p>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        id="close"
+                        data-lato="1"
+                        class="close btn btn-danger"
+                      >
+                        x
+                      </button>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr class="latomezo" data-lato="1" data-type="fov">
+              <td>Látomező mérete(szögperc):</td>
+              <td>
+                <input
+                  type="number"
+                  class="fov"
+                  id="1_fov"
+                  data-lato="1"
+                  value="900"
+                  step="1"
+                />
+              </td>
+            </tr>
+            <tr class="latomezo" data-lato="1" data-type="maglimit">
+              <td>Magnitutó Limit:</td>
+              <td>
+                <input
+                  type="number"
+                  class="maglimit"
+                  data-lato="1"
+                  id="1_mag"
+                  value="9"
+                  step="0.1"
+                />
+              </td>
+            </tr>
+            <tr class="latomezo" data-lato="2" data-type="line">
+              <td colspan="2"><hr /></td>
+            </tr>
+            <tr class="latomezo" data-lato="2" data-type="label">
+              <td colspan="2">
+                <table style="width: 100%">
+                  <tr>
+                    <td style="width: 93%" align="center">
+                      <p class="latomezo" data-lato="2" data-type="text">
+                        Látómező 2.
+                      </p>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        id="close"
+                        data-lato="2"
+                        class="close btn btn-danger"
+                      >
+                        x
+                      </button>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr class="latomezo" data-lato="2" data-type="fov">
+              <td>Látomező mérete(szögperc):</td>
+              <td>
+                <input
+                  type="number"
+                  class="fov"
+                  id="2_fov"
+                  data-lato="2"
+                  value="180"
+                  step="1"
+                />
+              </td>
+            </tr>
+            <tr class="latomezo" data-lato="2" data-type="maglimit">
+              <td>Magnitutó Limit:</td>
+              <td>
+                <input
+                  type="number"
+                  class="maglimit"
+                  data-lato="2"
+                  id="2_mag"
+                  value="11"
+                  step="0.1"
+                />
+              </td>
+            </tr>
+            <tr class="latomezo" data-lato="3" data-type="line">
+              <td colspan="2"><hr /></td>
+            </tr>
+            <tr class="latomezo" data-lato="3" data-type="label">
+              <td colspan="2">
+                <table style="width: 100%">
+                  <tr>
+                    <td style="width: 93%" align="center">
+                      <p class="latomezo" data-lato="3" data-type="text">
+                        Látómező 3.
+                      </p>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        id="close"
+                        data-lato="3"
+                        class="close btn btn-danger"
+                      >
+                        x
+                      </button>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr class="latomezo" data-lato="3" data-type="fov">
+              <td>Látomező mérete(szögperc):</td>
+              <td>
+                <input
+                  type="number"
+                  class="fov"
+                  id="3_fov"
+                  data-lato="3"
+                  value="120"
+                  step="1"
+                />
+              </td>
+            </tr>
+            <tr class="latomezo" data-lato="3" data-type="maglimit">
+              <td>Magnitutó Limit:</td>
+              <td>
+                <input
+                  type="number"
+                  class="maglimit"
+                  data-lato="3"
+                  id="3_mag"
+                  value="12"
+                  step="0.1"
+                />
+              </td>
+            </tr>
+            <tr class="latomezo" data-lato="4" data-type="line">
+              <td colspan="2"><hr /></td>
+            </tr>
+            <tr class="latomezo" data-lato="4" data-type="label">
+              <td colspan="2">
+                <table style="width: 100%">
+                  <tr>
+                    <td style="width: 93%" align="center">
+                      <p class="latomezo" data-lato="4" data-type="text">
+                        Látómező 4.
+                      </p>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        id="close"
+                        data-lato="4"
+                        class="close btn btn-danger"
+                      >
+                        x
+                      </button>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr class="latomezo" data-lato="4" data-type="fov">
+              <td>Látomező mérete(szögperc):</td>
+              <td>
+                <input
+                  type="number"
+                  class="fov"
+                  id="4_fov"
+                  data-lato="4"
+                  value="60"
+                  step="1"
+                />
+              </td>
+            </tr>
+            <tr class="latomezo" data-lato="4" data-type="maglimit">
+              <td>Magnitutó Limit:</td>
+              <td>
+                <input
+                  type="number"
+                  class="maglimit"
+                  data-lato="4"
+                  id="4_mag"
+                  value="13"
+                  step="0.1"
+                />
+              </td>
+            </tr>
+            <tr class="latomezo" data-lato="5" data-type="line">
+              <td colspan="2"><hr /></td>
+            </tr>
+            <tr class="latomezo" data-lato="5" data-type="label">
+              <td colspan="2">
+                <table style="width: 100%">
+                  <tr>
+                    <td style="width: 93%" align="center">
+                      <p class="latomezo" data-lato="5" data-type="text">
+                        Látómező 5.
+                      </p>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        id="close"
+                        data-lato="5"
+                        class="close btn btn-danger"
+                      >
+                        x
+                      </button>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr class="latomezo" data-lato="5" data-type="fov">
+              <td>Látomező mérete(szögperc):</td>
+              <td>
+                <input
+                  type="number"
+                  class="fov"
+                  id="5_fov"
+                  data-lato="5"
+                  value="30"
+                  step="1"
+                />
+              </td>
+            </tr>
+            <tr class="latomezo" data-lato="5" data-type="maglimit">
+              <td>Magnitutó Limit:</td>
+              <td>
+                <input
+                  type="number"
+                  id="5_mag"
+                  value="14"
+                  name="a"
+                  step="0.1"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" align="center">
+                <button type="button" id="dow" class="btn btn-primary">
+                  Térkép(ek) letöltése
+                </button>
+              </td>
+            </tr>
+          </table>
+        </td>
+        <td>
+          <table border="0" id="process_bar"></table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='css/bootstrap.min.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='css/style.css')}}"
+    />
+    <title>Változó Csillag Kereső Térképek - {{ name }}</title>
+  </head>
+
+  <body>
+    <h1>{{ name }}</h1>
+    <a href="/">Vissza a csillagok listájára</a>
+    <br />
+    <img src="/chart?star={{ name }}" />
+    <table border="1">
+      <tr>
+        <td colspan="5"><h2>Normál állású térképek</h2></td>
+      </tr>
+      <tr>
+        <td>Látomező</td>
+        <td>MagnitutóLimit</td>
+        <td>Képfelbontás(DPI)</td>
+        <td>Letöltésdátuma</td>
+        <td>Link</td>
+      </tr>
+      {% for item in norm %}
+      <tr>
+        <td>{{ item['fov'] }}</td>
+        <td>{{ item['maglimit'] }}</td>
+        <td>{{ item['resolution'] }}</td>
+        <td>{{ item['date'] }}</td>
+        <td><a href="/map?image={{ item['image'] }}">Link</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+    <br />
+    <table border="1">
+      <tr>
+        <td colspan="5"><h2>Zenit tükőr állású térképek</h2></td>
+      </tr>
+      <tr>
+        <td>Látomező</td>
+        <td>MagnitutóLimit</td>
+        <td>Képfelbontás(DPI)</td>
+        <td>Letöltésdátuma</td>
+        <td>Link</td>
+      </tr>
+      {% for item in zenit %}
+      <tr>
+        <td>{{ item['fov'] }}</td>
+        <td>{{ item['maglimit'] }}</td>
+        <td>{{ item['resolution'] }}</td>
+        <td>{{ item['date'] }}</td>
+        <td><a href="/map?image={{ item['image'] }}">Link</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+    <br />
+    <table border="1">
+      <tr>
+        <td colspan="5"><h2>Newton állású térképek</h2></td>
+      </tr>
+      <tr>
+        <td>Látomező</td>
+        <td>MagnitutóLimit</td>
+        <td>Képfelbontás(DPI)</td>
+        <td>Letöltésdátuma</td>
+        <td>Link</td>
+      </tr>
+      {% for item in newton %}
+      <tr>
+        <td>{{ item['fov'] }}</td>
+        <td>{{ item['maglimit'] }}</td>
+        <td>{{ item['resolution'] }}</td>
+        <td>{{ item['date'] }}</td>
+        <td><a href="/map?image={{ item['image'] }}">Link</a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

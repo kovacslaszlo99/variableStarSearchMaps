@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='css/bootstrap.min.css')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='css/style.css')}}"
+    />
+    <title>Változó Csillag Kereső Térképek - {{ star_name }}</title>
+  </head>
+
+  <body>
+    <a href="/star?name={{ star_name }}">
+      Vissza a(z) {{ star_name }} térképek listájára
+    </a>
+    <h2>
+      {% if east == "right" and north == "up" %} Normál állású térkép {%elif
+      east == "left" and north == "up" %} Zenit tükrös térkép {%elif east ==
+      "left" and north == "down" %} Newton tájolású térkép {% else %} Alternativ
+      tájolású térkép {% endif %}
+    </h2>
+    <table>
+      <tr>
+        <td style="width: 5%">
+          {% if not minusz == None %}
+          <a class="btn btn-primary" href="/map?image={{ minusz }}">+</a>
+          {% endif %}
+        </td>
+        <td>
+          <img
+            src="{{url_for('static', filename='maps/'+image)}}"
+            style="width: 90%"
+          />
+        </td>
+        <td>
+          {% if not plusz == None %}
+          <a class="btn btn-primary" href="/map?image={{ plusz }}">-</a>
+          {% endif %}
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
